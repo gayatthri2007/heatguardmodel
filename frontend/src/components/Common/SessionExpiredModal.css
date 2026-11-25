@@ -1,0 +1,21 @@
+.session-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.session-modal {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 420px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  text-align: center;
+}
+.session-modal h3 { margin: 0 0 8px 0; }
+.session-modal p { color: #666; margin: 0 0 16px 0; }
+.session-modal .actions { display:flex; justify-content:center }
+.session-modal .primary { background: #8e6cf0; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; }

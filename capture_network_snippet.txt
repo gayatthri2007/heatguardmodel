@@ -1,0 +1,37 @@
+// Paste this into the browser console on the failing page to capture XHR/fetch requests
+(function(){
+  const entries = [];
+  const origFetch = window.fetch;
+  window.fetch = async function(...args){
+    const start = Date.now();
+    try{
+      const res = await origFetch.apply(this,args);
+      const clone = res.clone();
+      const body = await clone.text().catch(()=>'<non-text>');
+      entries.push({type:'fetch', url: args[0], options: args[1], status: res.status, body, duration: Date.now()-start});
+      console.log('Captured fetch', entries[entries.length-1]);
+      return res;
+    }catch(e){
+      entries.push({type:'fetch', url: args[0], options: args[1], error: String(e), duration: Date.now()-start});
+      console.error('Fetch error', entries[entries.length-1]);
+      throw e;
+    }
+  };
+  const origX = window.XMLHttpRequest.prototype.open;
+  const send = window.XMLHttpRequest.prototype.send;
+  window.XMLHttpRequest.prototype.open = function(method, url, ...rest){
+    this._reqinfo = {method, url};
+    return origX.apply(this, [method, url, ...rest]);
+  };
+  window.XMLHttpRequest.prototype.send = function(body){
+    const xhr = this;
+    const start = Date.now();
+    xhr.addEventListener('loadend', function(){
+      entries.push({type:'xhr', url: xhr._reqinfo && xhr._reqinfo.url, method: xhr._reqinfo && xhr._reqinfo.method, status: xhr.status, response: xhr.responseText, duration: Date.now()-start});
+      console.log('Captured xhr', entries[entries.length-1]);
+    });
+    return send.apply(this, [body]);
+  };
+  window.__captured_requests = entries;
+  console.log('Network capture enabled. Use window.__captured_requests to inspect.');
+})();

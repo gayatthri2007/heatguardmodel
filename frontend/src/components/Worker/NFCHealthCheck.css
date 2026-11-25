@@ -1,0 +1,261 @@
+/* NFC Health Check Component Styles */
+
+.nfc-health-check-wrapper {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  text-align: center;
+}
+
+/* NFC Button */
+.nfc-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nfc-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.nfc-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.nfc-button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Spinner animation */
+.nfc-button .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nfc-button .spinner {
+  margin-bottom: 4px;
+}
+
+/* Scanning status */
+.scan-status {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #4CAF50;
+  border-radius: 6px;
+  animation: fadeInUp 0.3s ease;
+}
+
+.status-text {
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Alert styles */
+.alert {
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 14px;
+  animation: slideDown 0.3s ease;
+}
+
+.alert-danger {
+  background-color: rgba(244, 67, 54, 0.2);
+  border-left: 4px solid #f44336;
+  color: #fff3cd;
+}
+
+/* Results Card */
+.nfc-result-card {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.4s ease;
+}
+
+.nfc-result-card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 18px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-item {
+  background: #f5f7fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e0e7ff;
+}
+
+.result-item label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.result-item value {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.result-item value.risk-0 {
+  color: #4caf50; /* Green */
+}
+
+.result-item value.risk-1 {
+  color: #ff9800; /* Orange */
+}
+
+.result-item value.risk-2 {
+  color: #f44336; /* Red */
+}
+
+.result-item value.risk-3 {
+  color: #c41c3b; /* Dark Red */
+}
+
+.result-message {
+  background: #f0f4ff;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #667eea;
+  border-radius: 4px;
+  margin: 1rem 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.result-recommendation {
+  background: #fff3e0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #ff9800;
+  border-radius: 4px;
+  color: #333;
+  font-size: 13px;
+  margin: 1rem 0 0 0;
+  line-height: 1.5;
+}
+
+/* Center camera preview video and style it */
+.video-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.nfc-health-check-wrapper video {
+  display: block;
+  width: 320px;
+  max-width: 100%;
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
+.roi-box {
+  position: absolute;
+  top: 2%;
+  left: 25%;
+  width: 50%;
+  height: 25%;
+  border: 2px dashed #fff;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nfc-health-check-wrapper {
+    padding: 1rem;
+  }
+
+  .nfc-button {
+    width: 90px;
+    height: 90px;
+    font-size: 12px;
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-item value {
+    font-size: 18px;
+  }
+}
